@@ -193,10 +193,7 @@
 
 
 ;;;; START OF THE SLIDES
-(slide ()
-  @h1{Binding Blockchains Together}
-  @h1{with Accountability}
-  @h1{through Computability Logic}
+(slide () @h1{Binding Blockchains Together}@h1{with Accountability}@h1{through Computability Logic}
   ~
   ~
   @p{François-René Rideau, @em{Legicash}}
@@ -206,8 +203,7 @@
   @url{http://gitlab.com/legicash/bbtwatcl})
 
 (slide-group "Introduction"
-(gslide ()
- @h1{The Take Home Points}
+(gslide () @h1{The Take Home Points}
  ~
  @L{Take "Consensus as Court" Seriously} @comment{It's a productive story}
  ~
@@ -221,12 +217,11 @@
    On the other hands, Formal Methods are still kind of FP, but on steroids, at a higher level.
  })
 
-(gslide ()
- @h1{Advancement Status}
+(gslide () @h1{Advancement Status}
  ~
  @L{This talk: only a BIG PICTURE}
  ~
- @L{Active development: now 3 full-time developers}
+ @L{Active development: now 3 full-time developers} @comment{It's not vaporware.}
  ~
  @L{Current status: Mock of a Mock on Ethereum}
  ~
@@ -236,8 +231,8 @@
 ;;;);; Introduction
 ;;;(slide-group "Motivation"
 
-(gslide ()
- @h1{First Problem: Scaling Issue}
+(gslide () @h1{First Problem: Scaling Issue}
+ @comment{Here's one kind of problem we're trying to solve}
  ~
  @L{Throughput: 7 tps for BTC, 15 for ETH}
  ~
@@ -248,9 +243,15 @@
  @L{Gas, groceries, drinks, meals, etc.}
  @comment{flowers when you're late for mommy's birthday})
 
-(gslide ()
- @h1{Usual solution?}
+(gslide () @h1{Usual solution?}
  ~
+ @comment{
+   Fiat currencies used to have a similar issue, in that
+   it used to take weeks or months for checks to clear.
+   But nowadays, people don't use checks anymore, they use payment cards,
+   which can confirm payment in a few seconds...
+   even though it may still take months for funds to clear in the backend.
+ }
  @L{Fiat currencies: fast payment via payment cards.}
  ~
  @L{Why can't we have payment card equivalent for cryptocurrency?}
@@ -264,8 +265,7 @@
 );;Movitation
 
 (slide-group "Consensus as Court" ;; Back to First Principles
-(gslide ()
- @h1{What is a distributed consensus for?}
+(gslide () @h1{What is a distributed consensus for?}
  ~
  @L{If everyone is honest and competent, a signed check is gold.}
  ~
@@ -273,10 +273,13 @@
  ~
  @L{The Consensus is to prevent and resolve disputes.}
  ~
- @L{Necessarily slow and expensive, it is analogous to a @em{Court}.})
+ @L{It is analogous to a @em{Court} — Necessarily slow and expensive.}
+ @comment{
+   They involve making public pronouncements that are unequivocally recognized
+   by everyone all around the globe.
+ })
 
-(gslide ()
- @h1{Don't go to Court for Casual Payment}
+(gslide () @h1{Don't go to Court for Casual Payment}
  ~
  @L{Court: yes to buy a house, a car.}
  ~
@@ -286,8 +289,7 @@
  ~
  @L{Only go to Court if to prevent and resolve disputes.})
 
-(gslide ()
- @h1{Analogy between Consensus & Court}
+(gslide () @h1{Analogy between Consensus & Court}
  ~
  @L{Analogy: one Abstraction applied twice...}
  ~
@@ -296,10 +298,14 @@
  ~
  @L{Common Abstraction: Adjudication}
  ~
- @L{Different Parameters: Humans vs Machines})
+ @L{Different Parameters: Humans vs Machines}
+ @comment{
+   Of course, neither is a substitute for the other.
+   That ought to be obvious, but apparently isn't,
+   so it is important to mention it.
+ })
 
-(gslide ()
- @h1{Analogy between Consensus & Court}
+(gslide () @h1{Analogy between Consensus & Court}
  (letrec ((td* (lambda (x) (td (color x #:fg *white*))))
           (line (lambda (name human smart)
                   (list (th* name) (td* human) (td* smart))))
@@ -317,8 +323,7 @@
             ("outcome" "uncertain" "certain (*)"))))
  @comment{(*) certain within operating parameters})
 
-(gslide ()
- @h1{What Law @em{CANNOT} do}
+(gslide () @h1{What Law @em{CANNOT} do}
  ~
  @L{@q{Why don't we just make X illegal?}}
  ~
@@ -328,8 +333,7 @@
  ~
  @L{Law can never prevent anyone from ever doing anything.})
 
-(gslide ()
- @h1{What Law @em{CAN} do}
+(gslide () @h1{What Law @em{CAN} do}
  ~
  @L{It can only hold them accountable for what they do.}
  ~
@@ -337,10 +341,9 @@
  ~
  @L{Skin in the game.}
  ~
- @L{Human Law: get caught. Crypto Law: must deposit bond in advance.})
+ @L{Human Law: get caught. Crypto Law: must deposit collateral.})
 
-(gslide ()
- @h1{Economic Analysis of Law}
+(gslide () @h1{Economic Analysis of Law}
  ~
  @L{Branch of Economics.}
  ~
@@ -350,8 +353,7 @@
  ~
  @L{Applies to lawmakers, too (Public Choice Theory)})
 
-(gslide ()
- @h1{Kinds of Freedom: Voice, Exit, Enter}
+(gslide () @h1{Kinds of Freedom: Voice, Exit, Enter}
  ~
  @L{No Voice: Just shut up and obey.}
  ~
@@ -361,19 +363,17 @@
  ~
  @L{Enter: Found a new competitor.})
 
-(gslide ()
- @h1{Aligning interests}
+(gslide () @h1{Aligning interests}
  ~
  @L{No Voice: Oppression. Destroys alignment.}
  ~
  @L{Voice: Coordination. @em{Assumes} alignment, @em{consumes} it.}
  ~
- @L{Exit: Allows alignment, but within Oligopoly.}
+ @L{Exit: Allows alignment, but limited within Oligopoly.}
  ~
  @L{Enter: Create alignment, via Free Competition.})
 
-(gslide ()
- @h1{Aligning interests of Payment Processors}
+(gslide () @h1{Aligning interests of Payment Processors}
  ~
  @L{On a blockchain, limited Voice, but unlimited Exit and Enter.}
  ~
@@ -383,8 +383,7 @@
  ~
  @L{Enter: Anyone can cook.})
 
-(gslide ()
- @h1{Consensus as Court}
+(gslide () @h1{Consensus as Court}
  ~
  @L{Fruitful Point of View}
  ~
@@ -397,8 +396,7 @@
 ); Consensus as Court (Back to First Principles)
 
 (slide-group "Smart Contracts for Side-Chains"
-(gslide ()
- @h1{First good news! Solving Scaling}
+(gslide () @h1{First good news! Solving Scaling}
  ~
  @L{Non-publication is infinitely faster than publication.}
  @comment{
@@ -412,8 +410,7 @@
  ~
  @L{Do @em{not} publish transactions on the main chain — WIN!})
 
-(gslide ()
- @h1{Non publication is for contracts, too!}
+(gslide () @h1{Non publication is for contracts, too!}
  ~
  @L{Publish contract with salted hashes of the clauses (Bitcoin MAST).}
  ~
@@ -424,8 +421,7 @@
  @L{Smaller, Cheaper, Faster, More Private.}
  @comment{})
 
-(gslide ()
- @h1{What are contracts for?}
+(gslide () @h1{What are contracts for?}
  ~
  @L{Mechanism to create alignment of interests.}
  @comment{
@@ -444,8 +440,7 @@
  @L{Do all the work in side-chains.}
  @comment{Stay off the main chain.})
 
-(gslide ()
- @h1{What do contracts consist in?}
+(gslide () @h1{What do contracts consist in?}
  ~
  @L{Mutual obligations.}
  ~
@@ -456,8 +451,7 @@
  @L{If they break their promise, a sanction punishes them.}
  @comment{})
 
-(gslide ()
- @h1{Example Contract: Atomic Swap}
+(gslide () @h1{Example Contract: Atomic Swap}
  ~
  @L{Exchange $1000 worth between Monero and Zcash.}
  @comment{But neither of us wants to be first to send.}
@@ -475,8 +469,7 @@
  @L{Beware DDoS: hide behind Tor, have backup route.}
  @comment{})
 
-(gslide ()
- @h1{Second Good News! Solving Interoperability}
+(gslide () @h1{Second Good News! Solving Interoperability}
  @comment{And that's what I mean by "Binding Blockchains Together"}
  ~
  @L{No trust needed, only well-written software.}
@@ -508,8 +501,7 @@
    There are various alternatives in incentive design.
  })
 
-(gslide ()
- @h1{What about that large stake?}
+(gslide () @h1{What about that large stake?}
  ~
  @L{Full bond needed to ensure complete transaction.}
  ~
@@ -523,8 +515,7 @@
 );; Smart Contracts
 
 (slide-group "A Logic for Smart Contract"
-(gslide ()
- @h1{Logic? What Logic?}
+(gslide () @h1{Logic? What Logic?}
  ~
  @L{Law: verifying compliance, punishing non-compliance}
  ~
@@ -536,8 +527,7 @@
  @comment{
  })
 
-(gslide ()
- @h1{What is a legal argument?}
+(gslide () @h1{What is a legal argument?}
  ~
  @L{Two parties disagree about a claim.}
  ~
@@ -548,8 +538,7 @@
  @L{It's an @em{Interactive proof}.}
  @comment{})
 
-(gslide ()
- @h1{What is an interactive proof?}
+(gslide () @h1{What is an interactive proof?}
  @L{Let's argue: "All sheep are the same color as mine" (in CO)}
  @fragment[#:index 1]{@C{@em{∃x   ∀y      P(x,y)}}}
  @fragment[#:index 2]{@C{@em{vs}}
@@ -591,20 +580,18 @@
    the second entry is earlier than the former.
  })
 
-(gslide ()
- @h1{Game Semantics}
+(gslide () @h1{Game Semantics}
  ~
  @L{Translate any formula into a game.}
  ~
- @L{@em{If} the formula is decidable, then goods guys have a winning strategy.}
+ @L{@em{If} the formula is decidable, then good guys have a winning strategy.}
  ~
  @L{If all quantifiers are over known finite data structure, good guys win.}
  ~
  @L{What is the logic built on Game Semantics?}
  @comment{})
 
-(gslide ()
- @h1{Computability Logic}
+(gslide () @h1{Computability Logic}
  ~
  @L{Game Semantics first, syntax second.}
  ~
@@ -621,8 +608,7 @@
    Third party litigation: Multi-player games!
 })
 
-(gslide ()
- @h1{Higher-Level View of Smart Contracts}
+(gslide () @h1{Higher-Level View of Smart Contracts}
  ~
  @L{A contract (logical specification) is a small piece of a dApp.}
  ~
@@ -633,8 +619,7 @@
  @L{A "contract VM" operation is a small piece of a contract invocation.}
  @comment{})
 
-(gslide ()
- @h1{Programming using Logic}
+(gslide () @h1{Programming using Logic}
  @p{
    @br[]
    @cite{A programming language is low level when its programs @br[] require attention to the irrelevant.}
@@ -649,8 +634,7 @@
  ~
  @comment{})
 
-(gslide ()
- @h1{What Low-level VM for Contracts?}
+(gslide () @h1{What Low-level VM for Contracts?}
  ~
  @L{Of course use Functional Programming — Logic made computable.}
  ~
@@ -662,8 +646,7 @@
  @L{Access to blockchain (and other?) data via "oracles".}
  @comment{})
 
-(gslide ()
- @h1{How to minimize interaction steps?}
+(gslide () @h1{How to minimize interaction steps?}
  @L{Number of steps: sum/product alternations, dichotomies}
  @comment{
    Quantifiers are for general dependent sums and products,
@@ -684,8 +667,7 @@
    (Beware though that proofs in more than two steps require third-party litigation.)
  })
 
-(gslide ()
- @h1{Third Party Litigation}
+(gslide () @h1{Third Party Litigation}
  ~
  @L{What if Alice and Trent collude to defraud Bob & other users?}
  ~
@@ -704,8 +686,7 @@
    All identities are pseudonymous, anyway.
  })
 
-(gslide ()
- @h1{Why Formal methods?}
+(gslide () @h1{Why Formal methods?}
  ~
  @L{Solutions: obvious with the right POV, unconceivable without.}
  @comment{
@@ -719,8 +700,7 @@
  @L{If the greatest specialist lose 300M$ to a mistake in 400 loc...}
  @comment{})
 
-(gslide ()
- @h1{Moving parts that need be consistent}
+(gslide () @h1{Moving parts that need be consistent}
  @L{Logical specification.}
  ~
  @L{Actual client and server code.}
@@ -741,8 +721,7 @@
  @comment{
  })
 
-(gslide ()
- @h1{Solution: Extract Everything from a Same Spec}
+(gslide () @h1{Solution: Extract Everything from a Same Spec}
  ~
  @L{Ensure all parts are in synch with each other:}
  ~
@@ -755,8 +734,7 @@
 ); A Logic for Smart Contracts
 
 (slide-group "The Court Registry"
-(gslide ()
- @h1{The Need for Shared Knowledge}
+(gslide () @h1{The Need for Shared Knowledge}
  ~
  @L{Black sheep hidden in hangar.}
  ~
@@ -767,8 +745,7 @@
  @L{@em{Open contract}: Scaling easy, but no Shared Knowledge. Solution???}
  @comment{})
 
-(gslide ()
- @h1{Court Registry}
+(gslide () @h1{Court Registry}
  ~
  @L{"Oracle" for public data availability.}
  ~
@@ -779,10 +756,9 @@
  @L{Preimage not enough: Must transitively validate against schema.}
  @comment{Against data schema})
 
-(gslide ()
- @h1{Court Registry Issues}
+(gslide () @h1{Court Registry Issues}
  ~
- @L{50% attack: given quorum of underwriting registrars @em{q}.}
+ @L{50% attack. Consider quorum @em{q} of underwriting registrars.}
  @L{If @em{q} collude: block withholding. If @em{1-q} collude, registration denial.}
  ~
  @L{"Oracle": Closed (oligopoly), or Open (bribing is legal!)}
@@ -793,16 +769,15 @@
  ~
  @L{Ideally, register on the main chain — but can it already scale?})
 
-(gslide ()
- @h1{Shared Knowledge vs Common Knowledge}
+(gslide () @h1{Shared Knowledge vs Common Knowledge}
  ~
  @L{Concepts from @em{Epistemic Logic}}
  ~
  @L{Shared Knowledge: what @em{everybody knows}}
- @L{Gossip Network. Detects double-spending.}
+ @L{Gossip Network. Detects double-spending. Prevents Triple-spending.}
  ~
  @L{Common Knowledge: what @em{everybody knows that everybody knows…}}
- @L{Consensus. Resolves double-spending.}
+ @L{Consensus. Resolves double-spending. Much more expensive to achieve.}
  @comment{
    Shared Knowledge can serve as a precursor to Common Knowledge.
    Obviously it is strictly less powerful than Common Knowledge, and much cheaper to achieve:
@@ -817,8 +792,7 @@
  @comment{
  })
 
-(gslide ()
- @h1{Repudiable Facilitators}
+(gslide () @h1{Repudiable Facilitators}
  ~
  @L{Managers for Open Contracts.}
  ~
@@ -831,8 +805,7 @@
  @L{Double as mutual verifiers. Maybe part of Court Registry.}
  @comment{})
 
-(gslide ()
- @h1{Fast Payment via Repudiable Facilitators}
+(gslide () @h1{Fast Payment via Repudiable Facilitators}
  ~
  @L{Can Solve Fast Payment at Scale: locally centralized.}
  ~
@@ -843,8 +816,7 @@
  @L{Merchant chooses whom to trust. Fallback to slow payment.}
  @comment{})
 
-(gslide ()
- @h1{Beyond Fast Payment}
+(gslide () @h1{Beyond Fast Payment}
  ~
  @L{dApps that extend Fast Payment: non-custodial exchange…}
  ~
@@ -859,8 +831,7 @@
 #| MAKE SLIDES
 
 
-(gslide ()
- @h1{TITLE}
+(gslide () @h1{TITLE}
  ~
  @L{X1}
  ~
@@ -873,22 +844,19 @@
 
 ------>8------>8------>8------>8------>8------>8------>8------>8------>8------
 
-(gslide ()
-  @h1{What we want}
+ (gslide () @h1{What we want}
   @CB{Fast yet Secure Transactions}
   @CB{Atomic Swap without Trusted Third Party}
   @CB{Decentralized Exchange}
   @CB{Safe Arbitrary User-defined Side-Chains})
 
- (gslide ()
-  @h1{How we get there}
+ (gslide () @h1{How we get there}
   @CB{Back to Principles: Consensus as a Court of Law}
   @CB{Smart Legal Arguments: Game Semantics}
   @CB{Smart Law: Computability Logic}
   @CB{The Holy Grail: Bind Blockchains Together})
 
-  (gslide ()
-   @h1{Smart means Automated}))
+  (gslide () @h1{Smart means Automated}))
 
 (slide-group "Back to Principles: Consensus as a Court of Law"
  (gslide () @h1{Consensus as Court})
@@ -924,8 +892,7 @@ Managing Forks
 |#
 
 (slide-group "Conclusion"
-(gslide ()
- @h1{The Take Home Points (redux)}
+(gslide () @h1{The Take Home Points (redux)}
  ~
  @L{Take "Consensus as Court" Seriously} @comment{It's a productive story}
  ~
@@ -939,8 +906,7 @@ Managing Forks
    On the other hands, Formal Methods are still kind of FP, but on steroids, at a higher level.
  })
 
-(gslide ()
- @h1{The Meta-Story}
+(gslide () @h1{The Meta-Story}
  ~
  @L{Seek the essence of a problem, stripped from incidentals.}
  ~
