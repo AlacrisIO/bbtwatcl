@@ -49,150 +49,9 @@
 ;; Join me in the revolution of programming financial contracts with logic!
 |#
 
-(require
- scribble/html
- net/url
- (for-syntax syntax/parse))
+(require scribble/html)
+(require "reveal.rkt")
 
-;; http://docs.racket-lang.org/scribble/extra-style.html
-
-;; Reveal and new html stuff
-(define/provide-elements/not-empty section video) ; more tags here
-
-;; Register sections (but only at the top-level)
-(define-values [get-sections register-section]
-  (let ([sections '()])
-    (values (λ () (reverse sections))
-            (λ (section) (set! sections (cons section sections))))))
-(define section-toplevel? (make-parameter #t))
-(define-syntax-rule (slide (options ...) stuff ...)
-  (do-slide (list options ...) (λ () (list stuff ...))))
-(define (do-slide options thunk)
-  (let ((toplevel? (section-toplevel?)))
-    (parameterize ([section-toplevel? #f])
-       (let ((section (apply section (append options (thunk)))))
-         (if toplevel?
-             (register-section section)
-             section)))))
-(define group-title (make-parameter #f))
-(define-syntax-rule (slide-group title stuff ...)
-  (do-slide-group title (λ () (list stuff ...))))
-(define (do-slide-group title thunk)
-  (slide ()
-   (slide () @(h1 title))
-   (parameterize ([group-title title])
-     (thunk))))
-(define (do-group-title)
-  (when (group-title)
-    (p align: 'right valign: 'top (font size: 4 (b (group-title))))))
-(define-syntax-rule (gslide (options ...) stuff ...)
-  (slide (options ...) (do-group-title) stuff ...))
-(define-syntax-rule (when-not condition body ...)
-  (when (not condition) body ...))
-
-(define (reveal-url . text)
-  ;; (cons "http://cdn.jsdelivr.net/reveal.js/3.0.0/" text)
-  (cons "resources/reveal/" text))
-
-;; Quick helpers
-(define-syntax-rule (defcodes lang ...)
-  (begin (define (lang . text) (pre (code class: 'lang text)))
-         ...))
-(defcodes scheme javascript haskell)
-
-(define (pic-url name url)
-  (let ((file (string-append "resources/pic/" name)))
-    (unless (file-exists? file)
-      (define out (open-output-file file #:exists 'truncate))
-      (call/input-url (string->url url)
-                      get-pure-port
-                      (λ (in) (copy-port in out)))
-      (close-output-port out))
-    file))
-
-(define (L . x) (apply div align: 'left x))
-(define (t . x) x)
-(define (C . x) (apply div align: 'center x))
-(define (CB . x) (C (apply b x)))
-
-(define (url x) (a href: x (tt x)))
-(define (comment . x) '())
-
-(define (image name url . size)
-  (img src: (pic-url name url) alt: name height: (if (empty? size) "75%" size)))
-
-(define (fragment #:index (index 1) . body)
-  (apply span class: 'fragment data-fragment-index: index body))
-
-(define *white* "#ffffff")
-(define *gray* "#7f7f7f")
-(define *blue* "#0000ff")
-(define *light-blue* "#b4b4ff")
-(define *red* "#ff0000")
-(define *light-red* "#ffb4b4")
-(define *green* "#00ff00")
-(define *light-green* "#b4ffb4")
-
-(define ~ @p{ })
-
-(define (spacing* l (space (br)))
-  (cond
-    ((null? l) (list space))
-    ((pair? l) (append (list space)
-                       (if (pair? (car l)) (car l) (list (car l)))
-                       (spacing* (cdr l))))
-    (else (error 'spacing*))))
-
-(define (spacing l)
-  (if (list? l)
-      (cdr (spacing* (filter-not null? l)))
-      l))
-
-(define (color text #:fg (fgcolor #f) #:bg (bgcolor #f))
-  (if (or fgcolor bgcolor)
-      (span style: (list (if fgcolor (list "color:" fgcolor ";") '())
-                     (if bgcolor (list "background-color:" bgcolor ";") '()))
-            text)
-      text))
-
-(define (gray . text) (color text #:fg *gray*))
-
-(define (bg-slide text fgcolor bgcolor)
-  (λ x
-    (gslide (data-background: bgcolor)
-     (spacing x)
-     (div align: 'right valign: 'bottom (color #:fg fgcolor text)))))
-
-(define-syntax-rule (x-slide (options ...) x ...)
-  (gslide (options ...) (spacing (list x ...))))
-
-;;(define th-width "4%")
-;;(define td-width "48%")
-;;(define table-width "114%")
-(define th-width "8%")
-(define td-width "46%")
-(define table-width "104%")
-
-(define (th* name)
-  (if name (th width: th-width (font size: "6" (color name #:fg *white*))) (td)))
-
-(define (row name left right
-             #:left-bg (left-bg #f) #:right-bg (right-bg #f) #:fragment? (fragment? #f))
-  (tr
-   (th* name)
-   (td
-    width: td-width (when left-bg bgcolor:) (when left-bg left-bg)
-    (spacing left))
-   (if right
-       (td
-        width: td-width bgcolor: right-bg
-        (when fragment? class:) (when fragment? 'fragment)
-        (when fragment? data-fragment-index:) (when fragment? 1)
-        (spacing right))
-       (td width: td-width))))
-
-
-;;;; START OF THE SLIDES
 (slide () @h1{Binding Blockchains Together}@h1{with Accountability}@h1{through Computability Logic}
   ~
   ~
@@ -209,6 +68,7 @@
  ~
  @L{Solve Scaling, Interoperability, dApps}
  ~
+ ~
  @L{Contracts are to @em{not} evaluate code on the blockchain}
  ~
  @L{Contract languages are @em{way} too low-level — use Formal Methods}
@@ -221,12 +81,11 @@
  ~
  @L{This talk: only a BIG PICTURE}
  ~
- @L{Active development: now 3 full-time developers} @comment{It's not vaporware.}
+ @L{@em{Legicash}: now 3 full-time developers} @comment{It's not vaporware.}
  ~
- @L{Current status: Mock of a Mock on Ethereum}
+ @L{Current status: Mock on Ethereum}
  ~
- @L{SHOW ME THE CODE!}
- @L{@url{https://gitlab.com/legicash/legicash-facts}})
+ @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}})
 
 ;;;);; Introduction
 ;;;(slide-group "Motivation"
@@ -289,6 +148,7 @@
  ~
  @L{Only go to Court if to prevent and resolve disputes.})
 
+;; XXXX REMOVE
 (gslide () @h1{Analogy between Consensus & Court}
  ~
  @L{Analogy: one Abstraction applied twice...}
@@ -306,8 +166,7 @@
  })
 
 (gslide () @h1{Analogy between Consensus & Court}
- (letrec ((td* (lambda (x) (td (color x #:fg *white*))))
-          (line (lambda (name human smart)
+ (letrec ((line (lambda (name human smart)
                   (list (th* name) (td* human) (td* smart))))
           (lines (lambda (titles . xss)
                    (apply table align: 'right width: "100%"
@@ -433,8 +292,13 @@
  ~
  @L{Contracts are @em{not} for "evaluating code on the blockchain"}
  @comment{Evaluating code on the blockchain is extremely slow and expensive,
-   literally billions of times more so than doing it on a regular computer.
+   literally millions of times more so than doing it on a regular computer.
    That's never a good first choice.
+
+   [Justification for million:
+    You can rent a Cloud VM for about $10 per month. That's 3.8e-8 USD/s.
+    You pay for on-chain computations at about 1 GAS per microsecond, at 555 USD/ETH and 10e-8 ETH per GAS,
+    for 5.55 USD/s.]
  }
  ~
  @L{Do all the work in side-chains.}
@@ -472,6 +336,7 @@
 (gslide () @h1{Second Good News! Solving Interoperability}
  @comment{And that's what I mean by "Binding Blockchains Together"}
  ~
+ ;;; EMPHASIZE CROSS-CHAIN INTEROPERABILITY
  @L{No trust needed, only well-written software.}
  @comment{
    In the end, if we both use competently written software,
@@ -501,7 +366,7 @@
    There are various alternatives in incentive design.
  })
 
-(gslide () @h1{What about that large stake?}
+'(gslide () @h1{What about that large stake?}
  ~
  @L{Full bond needed to ensure complete transaction.}
  ~
@@ -657,6 +522,7 @@
  @L{Minimize steps: Skolemization.}
  @C{@em{∀x:X  ∃y:Y  P(x,y)     ⇔     ∃f:X→Y  ∀x:X  P(x,f(x))}}
  @L{Group all the ∃ to the left. All proofs in two steps max!}
+ ;; XXXXX SIMPLIFY
  ~
  @L{In practice: publish a detailed indexed trace of the computation.}
  @L{Expensive, but paid for by the bad guy.}
@@ -701,24 +567,22 @@
  @comment{})
 
 (gslide () @h1{Moving parts that need be consistent}
- @L{Logical specification.}
- ~
- @L{Actual client and server code.}
- ~
- @L{Contract to hold people accountable.}
- ~
- @L{On-chain lawyer strategies to invoke the contract.}
- ~
- @L{Off-chain lawyer strategy to watch others and advise user.}
+ @L{- Logical specification.}
+ @L{- Actual code for clients.}
+ @L{- Actual code for servers.}
+ @L{- Actual code for verifiers.}
+ @L{- On-chain Contract to hold actors accountable.}
+ @L{- On-chain lawyer strategies to invoke the contract.}
+ @L{- Off-chain lawyer strategy to watch others and advise users.}
  @comment{
    Watch activity on the chain,
    take correct steps,
    stop users from making mistakes,
    explain what's happening to users.
  }
- ~
- @L{Generate tests}
+ @L{- Tests to convince bad guys not to try.}
  @comment{
+   Proving it correct is necessary but not enough.
  })
 
 (gslide () @h1{Solution: Extract Everything from a Same Spec}
@@ -757,6 +621,8 @@
  @comment{Against data schema})
 
 (gslide () @h1{Court Registry Issues}
+ ~
+ @L{WE SAME ISSUES AS EVERYONE ELSE}
  ~
  @L{50% attack. Consider quorum @em{q} of underwriting registrars.}
  @L{If @em{q} collude: block withholding. If @em{1-q} collude, registration denial.}
@@ -828,50 +694,7 @@
  @comment{})
 
 ); Court Registry
-#| MAKE SLIDES
-
-
-(gslide () @h1{TITLE}
- ~
- @L{X1}
- ~
- @L{X2}
- ~
- @L{X3}
- ~
- @L{X4}
- @comment{})
-
------->8------>8------>8------>8------>8------>8------>8------>8------>8------
-
- (gslide () @h1{What we want}
-  @CB{Fast yet Secure Transactions}
-  @CB{Atomic Swap without Trusted Third Party}
-  @CB{Decentralized Exchange}
-  @CB{Safe Arbitrary User-defined Side-Chains})
-
- (gslide () @h1{How we get there}
-  @CB{Back to Principles: Consensus as a Court of Law}
-  @CB{Smart Legal Arguments: Game Semantics}
-  @CB{Smart Law: Computability Logic}
-  @CB{The Holy Grail: Bind Blockchains Together})
-
-  (gslide () @h1{Smart means Automated}))
-
-(slide-group "Back to Principles: Consensus as a Court of Law"
- (gslide () @h1{Consensus as Court})
- (gslide () @h1{Accountability via Exit})
- (gslide () @h1{Micro-Accountability via Bonds})
- (gslide () @h1{Side-Chain Accountability via Repudiability})
- (gslide () @h1{Main-Chain Accountability via Forking}))
-
-(slide-group "Smart Legal Arguments: Game Semantics"
- (gslide () @h1{Smart Legal Argument as Verification Game})
- (gslide () @h1{Good Contracts do NOT go to Court})
- (gslide () @h1{Notaries })
- (gslide () @h1{Micro-Accountability via Bonds})
- (gslide () @h1{Side-Chain Accountability via Repudiability})
- (gslide () @h1{Main-Chain Accountability via Forking}))
+#|
 
 The Essential Duty of a Notary
 it is of vital importance to the system that no data is made part of the Consensus unless all data relevant to smart law that is transitively reachable from it by the following digests in a content-addressed store is itself shared knowledge.
@@ -923,34 +746,25 @@ Managing Forks
  ;; ~ @p[class: 'fragment]{Any question?}
  ))
 
-(output-xml
- @html{
-   @head{
-     @link[rel: 'stylesheet href: "resources/my.css"]
-     @link[rel: 'stylesheet href: @reveal-url{css/reveal.css}]
-     @link[rel: 'stylesheet href: @reveal-url{css/theme/black.css}]
-     @link[rel: 'stylesheet href: @reveal-url{lib/css/zenburn.css}]
-     @link[rel: 'stylesheet href: "resources/my.css"]
-   }
-   @body{
-     @div[class: 'reveal]{@div[class: 'slides]{@get-sections}}
-     @script[src: @reveal-url{lib/js/head.min.js}]
-     @script[src: @reveal-url{js/reveal.min.js}]
-     @script/inline{
-       Reveal.initialize({
-         dependencies: [
-           {src: "@reveal-url{plugin/highlight/highlight.js}",
-            async: true, callback: () => hljs.initHighlightingOnLoad()}],
-         controls: false
-       });
-     }}})
+(gslide () @h1{Advancement Status}
+ ~
+ @L{This talk: only a BIG PICTURE}
+ ~
+ @L{@em{Legicash}: now 3 full-time developers} @comment{It's not vaporware.}
+ ~
+ @L{Current status: Mock on Ethereum}
+ ~
+ @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}})
+
 
 #|
 cut as much of the introduction as possible
 
-Joseph Poon's talk at Deconomy 2018: "Consensus and Cryptoeconomic Incentive Mechanisms" https://youtu.be/nZKdy7kZGBc
-
 Bigger emphasis on logic & formal methods --- prune more social
 Have a concrete example.
 Example for Skolemization.
+
+Last slide: URLs legicash, release.
 |#
+
+(reveal)
