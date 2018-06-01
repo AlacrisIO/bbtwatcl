@@ -3,7 +3,7 @@
 (provide
  slide-group slide gslide
  L t C CB ~
- url image fragment color th* td*
+ url image fragment color th* td* simple-table
  ;; comment
  reveal)
 
@@ -151,6 +151,13 @@
         (spacing right))
        (td width: td-width))))
 
+(define (simple-table contents)
+  (letrec ((line (lambda (th . tds) (cons (th* th) (map td* tds))))
+           (lines (lambda (titles . xss)
+                    (apply table align: 'right width: "100%"
+                       (tr (map th* titles))
+                       (map (lambda (xs) (apply tr (apply line xs))) xss)))))
+    (apply lines contents)))
 
 (define (reveal)
   (output-xml

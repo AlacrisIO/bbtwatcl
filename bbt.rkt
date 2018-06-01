@@ -4,14 +4,14 @@
 ;; LambdaConf 2018, June 5th 2018
 ;; https://lambdaconf2018.dryfta.com/en/program-schedule/program/64/binding-blockchains-together-with-accountability-through-computability-logic
 ;; Based on a presentation given at the MIT Blockchain Club 2018-02-20
-;;
+
 ;; To compile it, use:
 ;;    racket bbt.rkt > bbt.html
-;;
+
 ;; This document is available under the bugroff license.
 ;;    http://www.oocities.org/soho/cafe/5947/bugroff.html
-;;
-;;
+
+
 ;; Official Abstract:
 ;;
 ;; I will present before you the holy grail of cryptocurrency:
@@ -49,13 +49,13 @@
 ;; Join me in the revolution of programming financial contracts with logic!
 |#
 
-(require scribble/html)
-(require "reveal.rkt")
+(require scribble/html "reveal.rkt")
 
 (slide () @h1{Binding Blockchains Together}@h1{with Accountability}@h1{through Computability Logic}
   ~
   ~
   @p{François-René Rideau, @em{Legicash}}
+  @C{fare@"@"legi.cash}
   ~
   ~
   @p{LambdaConf 2018, 2018-06-05}
@@ -93,9 +93,10 @@
 (gslide () @h1{First Problem: Scaling Issue}
  @comment{Here's one kind of problem we're trying to solve}
  ~
- @L{Throughput: 7 tps for BTC, 15 for ETH}
+ @L{Throughput: 7 tps for BTC, 15 for ETH (vs > 2000 tps for CC)}
+ ;; TODO: identify the max transaction throughput of credit card processors.
  ~
- @L{Latency: 60 minutes for BTC, 30 for ETH}
+ @L{Latency: 60 min for BTC, 30 for ETH (vs 7 s for CC)}
  ~
  @L{Too little, too slow for casual payments!}
  ~
@@ -148,8 +149,18 @@
  ~
  @L{Only go to Court if to prevent and resolve disputes.})
 
-;; XXXX REMOVE
 (gslide () @h1{Analogy between Consensus & Court}
+ (simple-table
+  '(("" "human law" "smart law")
+    ("participants" "humans" "machines")
+    ("enforcement" "social" "algorithmic")
+    ("arbiter" "judge" "consensus")
+    ("register" "court clerk, etc." "account table, utxos")
+    ("interpretation" "flexible" "rigid")
+    ("outcome" "uncertain" "certain (*)")))
+ @comment{(*) certain within operating parameters})
+
+(gslide () @h1{Analogies for Functional Programmers}
  ~
  @L{Analogy: one Abstraction applied twice...}
  ~
@@ -164,23 +175,6 @@
    That ought to be obvious, but apparently isn't,
    so it is important to mention it.
  })
-
-(gslide () @h1{Analogy between Consensus & Court}
- (letrec ((line (lambda (name human smart)
-                  (list (th* name) (td* human) (td* smart))))
-          (lines (lambda (titles . xss)
-                   (apply table align: 'right width: "100%"
-                    (tr (map th* titles))
-                    (map (lambda (xs) (apply tr (apply line xs))) xss)))))
-   (apply lines
-          '(("" "human law" "smart law")
-            ("participants" "humans" "machines")
-            ("enforcement" "social" "algorithmic")
-            ("arbiter" "judge" "consensus")
-            ("register" "court clerk, etc." "account table, utxos")
-            ("interpretation" "flexible" "rigid")
-            ("outcome" "uncertain" "certain (*)"))))
- @comment{(*) certain within operating parameters})
 
 (gslide () @h1{What Law @em{CANNOT} do}
  ~
@@ -212,25 +206,16 @@
  ~
  @L{Applies to lawmakers, too (Public Choice Theory)})
 
-(gslide () @h1{Kinds of Freedom: Voice, Exit, Enter}
- ~
- @L{No Voice: Just shut up and obey.}
- ~
- @L{Voice: Say whatever you want. (But: See if I care.)}
- ~
- @L{Exit: Repudiate bad service providers. (But: Who else?)}
- ~
- @L{Enter: Found a new competitor.})
-
-(gslide () @h1{Aligning interests}
- ~
- @L{No Voice: Oppression. Destroys alignment.}
- ~
- @L{Voice: Coordination. @em{Assumes} alignment, @em{consumes} it.}
- ~
- @L{Exit: Allows alignment, but limited within Oligopoly.}
- ~
- @L{Enter: Create alignment, via Free Competition.})
+(gslide () @h1{Kinds of Freedom vs Alignment of Interests}
+ (simple-table
+  `(("" "Allowed Individual Action" "Effect on Interests")
+    ("None" "Just shut up & obey"
+     "Generate Chaos, Oppose Interests")
+    ("Voice" "Say whatever you want, Vote" ;; But: See if I care.
+     "Create Coordination, Consumes Alignment")
+    ("Exit" "Repudiate a bad provider" ;; But: Who else?
+     , @div{Finds Alignment, @br[] Within Limited Choice})
+    ("Enter" "Found a new competitor" "Create Alignment, Generate Order"))))
 
 (gslide () @h1{Aligning interests of Payment Processors}
  ~
@@ -257,6 +242,8 @@
 (slide-group "Smart Contracts for Side-Chains"
 (gslide () @h1{First good news! Solving Scaling}
  ~
+ @L{Do @em{not} publish transactions on the main chain — WIN!}
+ ~
  @L{Non-publication is infinitely faster than publication.}
  @comment{
    In the time you publish one transaction,
@@ -265,9 +252,7 @@
  ~
  @L{Publish title registration, in large batches.}
  ~
- @L{Publish law suits — few and far between thanks to good incentives}
- ~
- @L{Do @em{not} publish transactions on the main chain — WIN!})
+ @L{Publish law suits — few and far between thanks to good incentives})
 
 (gslide () @h1{Non publication is for contracts, too!}
  ~
@@ -298,7 +283,9 @@
    [Justification for million:
     You can rent a Cloud VM for about $10 per month. That's 3.8e-8 USD/s.
     You pay for on-chain computations at about 1 GAS per microsecond, at 555 USD/ETH and 10e-8 ETH per GAS,
-    for 5.55 USD/s.]
+    for 5.55 USD/s.
+    https://docs.google.com/spreadsheets/d/1m89CVujrQe5LAFJ8-YAUCcNK950dUzMQPMJBxRtGCqs/edit#gid=0
+   ]
  }
  ~
  @L{Do all the work in side-chains.}
@@ -366,7 +353,8 @@
    There are various alternatives in incentive design.
  })
 
-'(gslide () @h1{What about that large stake?}
+;; NB: Time is short, so skip over that slide
+(gslide () @h1{Swapping without a large stake}
  ~
  @L{Full bond needed to ensure complete transaction.}
  ~
@@ -376,6 +364,10 @@
  ~
  @L{Exchange $1000 at a time, repeat a thousand times.}
  @comment{
+   You get a smaller guarantee, for a smaller bond.
+
+   Social enforcement: whoever fails to complete their part
+   will be kicked out of exchanges forever.
  })
 );; Smart Contracts
 
@@ -406,10 +398,10 @@
 (gslide () @h1{What is an interactive proof?}
  @L{Let's argue: "All sheep are the same color as mine" (in CO)}
  @fragment[#:index 1]{@C{@em{∃x   ∀y      P(x,y)}}}
- @fragment[#:index 2]{@C{@em{vs}}
+ @fragment[#:index 3]{@C{@em{vs}}
  @C{@em{∀x   ∃y   ¬P(x,y)}}}
  ~
- @fragment[#:index 3]{@L{Brute force: show half a million sheep to the judge.}}
+ @fragment[#:index 2]{@L{Brute force: show half a million sheep to the judge.}}
  @comment{
    How can we argue in front of a judge whose time is very expensive?
    We could exhibit all the sheep one after the other in front of the court.
@@ -511,18 +503,41 @@
  @L{Access to blockchain (and other?) data via "oracles".}
  @comment{})
 
-(gslide () @h1{How to minimize interaction steps?}
- @L{Number of steps: sum/product alternations, dichotomies}
+(gslide () @h1{Issue: number of interaction steps}
+ @L{Number of steps: alternations of ∃ vs ∀; dichotomies}
  @comment{
-   Quantifiers are for general dependent sums and products,
-   but regular sums of constructors or products of terms are a special case.
-   Beware of unary representations, such as naïve blockchain
+   Mind though that each time you challenge the other party,
+   you have to give them ample enough time to respond; say two hours.
+   This means that a formula with a lot of alternations between ∃ vs ∀
+   (or non-dependent sums and products),
+   say to do a dichotomy search or two, may take a week;
+   a badly written specification with a thousand alternations
+   may lead taking months to interactively argue a case.
+   Unary representations, such as naïve blockchaining,
+   are worst of all.
  }
  ~
+ @comment{
+   Happily, there are techniques to minimize the number of steps required
+   to complete an interactive proof.
+ }
  @L{Minimize steps: Skolemization.}
  @C{@em{∀x:X  ∃y:Y  P(x,y)     ⇔     ∃f:X→Y  ∀x:X  P(x,f(x))}}
  @L{Group all the ∃ to the left. All proofs in two steps max!}
- ;; XXXXX SIMPLIFY
+ @comment{
+   In the first case, the adversary challenges you with an X, and you reply with a Y.
+
+   In the second case, you publish in advance a map associating to whichever potential challenge in X
+   your response in Y, then you challenge the adversary with an X.
+
+   Actually, publishing a map in advance also lets the adversary search the map for data,
+   so he further doesn't have to go through a lengthy round of challenges and responses
+   to search the map for content.
+
+   On the other hand, data that is so well indexed as to be searchable for justifications
+   and counter-justifications to an exit transaction could potentially be used
+   to survive the lack of a court registry(?)
+ }
  ~
  @L{In practice: publish a detailed indexed trace of the computation.}
  @L{Expensive, but paid for by the bad guy.}
@@ -643,7 +658,7 @@
  @L{Gossip Network. Detects double-spending. Prevents Triple-spending.}
  ~
  @L{Common Knowledge: what @em{everybody knows that everybody knows…}}
- @L{Consensus. Resolves double-spending. Much more expensive to achieve.}
+ @L{Consensus. Resolves double-spending. Much more expensive.}
  @comment{
    Shared Knowledge can serve as a precursor to Common Knowledge.
    Obviously it is strictly less powerful than Common Knowledge, and much cheaper to achieve:
@@ -694,25 +709,6 @@
  @comment{})
 
 ); Court Registry
-#|
-
-The Essential Duty of a Notary
-it is of vital importance to the system that no data is made part of the Consensus unless all data relevant to smart law that is transitively reachable from it by the following digests in a content-addressed store is itself shared knowledge.
-Prior technology sadly offers no way to safely delegate checks that something is shared knowledge before it is validated as suitable to include in the Consensus.
-Binding Two Chains Together
-Contract Logic
-The surface logic in which the laws and contracts are specified, in addition to those primitives, contain logical quantifiers, connectors and modes as per computability logic, including linear logic, temporal logic, etc.
-Response Window
-The total number of interactions required in a smart legal procedure is bounded by the number of alternations of nested logical quantifiers in the formula being argued.
-Third-party litigation
-third parties may litigate to enforce contracts and laws they are not directly interested in.
-Loss of License
-Blockchain Upgrade
-changes to the semantic of a blockchain should only take effect after a sufficient delay.
-the solution to having long-term contracts that bind two complex evolving blockchains involves having each chain maintain and publish on itself a complete reflective logical description of the chain’s logic in its own logic.
-Managing Forks
-
-|#
 
 (slide-group "Conclusion"
 (gslide () @h1{The Take Home Points (redux)}
@@ -731,11 +727,11 @@ Managing Forks
 
 (gslide () @h1{The Meta-Story}
  ~
- @L{Seek the essence of a problem, stripped from incidentals.}
+ @L{Given a problem, seek its essence, stripped from incidentals.}
  ~
- @L{Demand the ability to reason logically, for machines and humans.}
+ @L{Find the ability to reason logically, for machines and humans.}
  ~
- @L{Maintain structural correspondance between computation and logic.}
+ @L{Match the structure of the computation to that of the logic.}
  ~
  @L{… That's the essence of Functional Programming / Category Theory!}
  @comment{
@@ -744,27 +740,29 @@ Managing Forks
    which is what is good about Functional Programming
  }
  ;; ~ @p[class: 'fragment]{Any question?}
- ))
+ )
 
-(gslide () @h1{Advancement Status}
+(gslide () @h1{Contact}
  ~
- @L{This talk: only a BIG PICTURE}
+ @L{I NEED MORE INFO!   @em{Legicash} @url{https://legi.cash/}}
  ~
- @L{@em{Legicash}: now 3 full-time developers} @comment{It's not vaporware.}
+ @L{I WANT TO HELP!   Telegram @url{https://t.me/LegicashCommunity}}
  ~
- @L{Current status: Mock on Ethereum}
+ @L{TAKE MY MONEY!   Whitepaper @url{https://j.mp/FaCTS}}
  ~
- @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}})
+ @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}}))
 
 
 #|
-cut as much of the introduction as possible
 
-Bigger emphasis on logic & formal methods --- prune more social
-Have a concrete example.
-Example for Skolemization.
+Blockchain Upgrade
+changes to the semantic of a blockchain should only take effect after a sufficient delay.
+the solution to having long-term contracts that bind two complex evolving blockchains involves
+having each chain maintain and publish on itself a complete reflective logical description
+of the chain’s logic in its own logic.
 
-Last slide: URLs legicash, release.
+Managing Forks
+
 |#
 
 (reveal)
