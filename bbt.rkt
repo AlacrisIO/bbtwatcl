@@ -285,6 +285,8 @@
     You pay for on-chain computations at about 1 GAS per microsecond, at 555 USD/ETH and 10e-8 ETH per GAS,
     for 5.55 USD/s.
     https://docs.google.com/spreadsheets/d/1m89CVujrQe5LAFJ8-YAUCcNK950dUzMQPMJBxRtGCqs/edit#gid=0
+    See also
+    https://youtu.be/a-xHiI-G_CQ
    ]
  }
  ~
@@ -537,6 +539,8 @@
    On the other hand, data that is so well indexed as to be searchable for justifications
    and counter-justifications to an exit transaction could potentially be used
    to survive the lack of a court registry(?)
+
+   Lambda-lifting? not really.
  }
  ~
  @L{In practice: publish a detailed indexed trace of the computation.}
