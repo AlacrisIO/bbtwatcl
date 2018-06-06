@@ -163,6 +163,7 @@
   (output-xml
    @html{
      @head{
+       @meta[http-equiv: "Content-Type" content: "text/html; charset=utf-8"]
        @link[rel: 'stylesheet href: "resources/my.css"]
        @link[rel: 'stylesheet href: @reveal-url{css/reveal.css}]
        @link[rel: 'stylesheet href: @reveal-url{css/theme/black.css}]
