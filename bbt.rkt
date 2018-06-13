@@ -6,10 +6,10 @@
 ;; Based on a presentation given at the MIT Blockchain Club 2018-02-20
 
 ;; To compile it, use:
-;;    racket bbt.rkt > bbt.html
+;;    racket bbt.rkt > index.html
 
 ;; This document is available under the bugroff license.
-;;    http://www.oocities.org/soho/cafe/5947/bugroff.html
+;;    http://tunes.org/legalese/bugroff.html
 
 
 ;; Official Abstract:
@@ -127,7 +127,7 @@
 (slide-group "Consensus as Court" ;; Back to First Principles
 (gslide () @h1{What is a distributed consensus for?}
  ~
- @L{If everyone is honest and competent, a signed check is gold.}
+ @L{@em{If} everyone is honest and competent, a signed check is gold.}
  ~
  @L{You could re-endorse it eternally and never clear it.}
  ~
@@ -145,9 +145,9 @@
  ~
  @L{Court: not to buy coffee.}
  ~
- @L{Make casual payments with payment processors: that scales!}
+ @L{Make casual payments with payment processors: it scales!}
  ~
- @L{Only go to Court if to prevent and resolve disputes.})
+ @L{Only go to Court to prevent and resolve disputes.})
 
 (gslide () @h1{Analogy between Consensus & Court}
  (simple-table
@@ -188,13 +188,13 @@
 
 (gslide () @h1{What Law @em{CAN} do}
  ~
- @L{It can only hold them accountable for what they do.}
+ @L{It can only hold actors accountable for what they do.}
  ~
  @L{Provide @em{incentives}. Game Theory}
  ~
  @L{Skin in the game.}
  ~
- @L{Human Law: get caught. Crypto Law: must deposit collateral.})
+ @L{Human Law: can get caught. Smart Law: must deposit collateral.})
 
 (gslide () @h1{Economic Analysis of Law}
  ~
@@ -247,7 +247,7 @@
  @L{Non-publication is infinitely faster than publication.}
  @comment{
    In the time you publish one transaction,
-   I can "not publish" one billion trillion bajillion transactions.
+   I can "not publish" one billion trillion bajillion transactions, even ℵ₄₂
  }
  ~
  @L{Publish title registration, in large batches.}
@@ -582,7 +582,7 @@
  ~
  @L{Most parts can be fixed after deployment. Contracts cannot.}
  ~
- @L{If the greatest specialist lose 300M$ to a mistake in 400 loc...}
+ @L{If the greatest specialists lost 280M$ to a mistake in 400 loc...}
  @comment{})
 
 (gslide () @h1{Moving parts that need be consistent}
@@ -641,12 +641,12 @@
 
 (gslide () @h1{Court Registry Issues}
  ~
- @L{WE SAME ISSUES AS EVERYONE ELSE}
+ @L{WE HAVE THE SAME ISSUES AS EVERYONE ELSE}
  ~
  @L{50% attack. Consider quorum @em{q} of underwriting registrars.}
  @L{If @em{q} collude: block withholding. If @em{1-q} collude, registration denial.}
  ~
- @L{"Oracle": Closed (oligopoly), or Open (bribing is legal!)}
+ @L{"Oracle" dilemma: Closed (oligopoly), or Open (bribing is legal!)}
  @comment{
    Open Oracle == "TCR", Token-Curated Registry.
    Our current solution: closed for now, repudiate as soon as fishy.
@@ -687,7 +687,7 @@
  @L{Bonded so they can't profitably cheat (Skin in the Game)}
  @L{Can only do the Right Thing. At worst: fail to advance.}
  ~
- @L{Double as mutual verifiers. Maybe part of Court Registry.}
+ @L{Double as mutual verifiers. May be part of Court Registry.}
  @comment{})
 
 (gslide () @h1{Fast Payment via Repudiable Facilitators}
@@ -720,6 +720,7 @@
  @L{Take "Consensus as Court" Seriously} @comment{It's a productive story}
  ~
  @L{Solve Scaling, Interoperability, dApps}
+ ~
  ~
  @L{Contracts are to @em{not} evaluate code on the blockchain}
  ~

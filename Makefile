@@ -1,4 +1,4 @@
-all: bbt.html
+all: index.html
 
-bbt.html: bbt.rkt reveal.rkt
+index.html: bbt.rkt reveal.rkt
 	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
