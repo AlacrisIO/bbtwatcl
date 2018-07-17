@@ -27,7 +27,7 @@
 (define (sf . str) (make-element 'sf (decode-content str)))
 
 (define (moneyquote . x) (bold x))
-(define (q . x) (list "\"" x "\""))
+(define (q . x) (list "“" x "”"))
 
 (define-syntax (clblock stx)
   (syntax-parse stx
