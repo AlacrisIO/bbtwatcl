@@ -5,6 +5,10 @@ lib = utils.rkt # bibliography.scrbl
 
 all: PDF
 
+dsss: vdacoab.html
+vdacoab.html: vdacoab.rkt reveal.rkt
+	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
+
 slides: index.html
 index.html: bbt.rkt reveal.rkt
 	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
