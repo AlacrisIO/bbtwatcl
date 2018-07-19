@@ -37,19 +37,19 @@
   @p{Deepspec Summer School 2018, July 19th 2018}
   @url{http://bbt.legi.cash/vdacoab.html})
 
-(gslide () @h1{The Take Home Points}
+(gslide () @h1{dApps I'd like to see}
  ~
- @L{Solve Scalability, Interoperability, Safety issues for dApps}
+ @L{Non-custodial Exchange: real-time match traders for atomic swaps}
  ~
- @L{Consensus as Court, Lawsuit as Interactive Proof}
+ @L{Cross Payment: I pay the Bitcoin I have, you get the ZCash you want}
  ~
- @L{Game Theory, Game Semantics, Temporal Logic, Epistemic Logic}
+ @L{Supply Chain: log shipments and deliveries, automatic settlement}
  ~
- @L{Higher-Level: dApp invariants, not contract virtual machines})
+ @L{CryptoScalies: toys that can interact, not just be traded})
 
-(gslide () @h1{Cryptocurrency dApp issues}
+(gslide () @h1{Issues with Cryptocurrency dApps}
  ~
- @L{Scale: from 10 tps to 1e5 and beyond, latency 60 min to 6 s}
+ @L{Scale: from 10 tps to 10000 and beyond, latency 60 min to 6 s}
  ~
  @L{Interoperate: contracts that bind across multiple blockchains}
  ~
@@ -57,7 +57,7 @@
  ~
  @L{Have a paradigm: not just random code and silly games})
 
-(gslide () @h1{Consensus as Court}
+(gslide () @h1{Consensus as Judicial System}
  ~
  @L{An analogy is one abstraction, instantiated twice}
  ~
@@ -65,9 +65,9 @@
  ~
  @L{Distinct Parameters: humans & rhetoric vs computers & logic}
  ~
- @L{What are @q{Smart Lawsuits}? Interactive Proofs!})
+ @L{Common Observation: go to court to buy a house, not a drink})
 
-(gslide () @h1{Interactive Proof}
+(gslide () @h1{What are @q{Smart Lawsuits}? Interactive Proofs!}
  ~
  @L{Game Semantics: Transform formula into verification game}
  ~
@@ -84,7 +84,7 @@
  @L{Temporal Logic: multiple possible futures, timeouts}
  ~
  @L{Computability Logic: (game) Semantics first, syntax second}
- @L{... it already has Classical, Intuitionnistic, Linear fragments}
+ @L{... it already has Classical, Intuitionistic, Linear fragments}
  @L{Coq: internal models, reflection and extraction}
  @L{Layers: verify the past, make the present, reason about future})
 
@@ -97,7 +97,7 @@
   @L{Counsel to explain consequences of (in)action (Expert System)}
   @L{Showcase for robustness vs attack scenarios (Integration Tests)}
   ~
-  @L{Low-level detail: semantics of invididual contract invocation})
+  @L{Low-level detail: semantics of individual contract invocation})
 
 (gslide () @h1{Shared Knowledge: the Court Registry}
  ~
@@ -108,6 +108,16 @@
  @L{Shared Knowledge, precursor to Common Knowledge}
  ~
  @L{Court Registry: Oracle for public data availability})
+
+(gslide () @h1{The Take Home Points}
+ ~
+ @L{Solve Scalability, Interoperability, Safety issues for dApps}
+ ~
+ @L{Consensus as Court, Lawsuit as Interactive Proof}
+ ~
+ @L{Game Theory, Game Semantics, Temporal Logic, Epistemic Logic}
+ ~
+ @L{Higher-Level: dApp invariants, not contract virtual machines})
 
 (gslide () @h1{Thanks}
  ~
