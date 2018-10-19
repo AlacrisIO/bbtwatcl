@@ -11,9 +11,9 @@
           "utils.rkt" "bibliography.scrbl")
 
 @; Hide author information for submission to Scaling Bitcoin
-@;@authorinfo["François-René Rideau" "Legicash" "fare@legi.cash"]
-@authorinfo["Author name withheld" "Affiliation withheld" "email@withheld"]
-@; http://legi.cash/
+@;@authorinfo["Author name withheld" "Affiliation withheld" "email@withheld"]
+@authorinfo["François-René Rideau" "Alacris" "fare@alacris.io"]
+@; http://alacris.io/
 
 @; This document is available under the bugroff license.
 @; http://www.geocities.com/SoHo/Cafe/5947/bugroff.html
@@ -22,7 +22,8 @@
 @; Based on a presentation given at LambdaConf 2018 2018-06-05
 @; Based on a presentation given at the MIT Blockchain Club 2018-02-20
 
-@conferenceinfo["Scaling Bitcoin 2018 \"Kaizen\"" "2018-10-06, Tokyo, Japan"] @copyrightyear{2018} @; SUBMITTED
+@;@conferenceinfo["Scaling Bitcoin 2018 \"Kaizen\"" "2018-10-06, Tokyo, Japan"] @copyrightyear{2018} @; SUBMITTED
+@;@conferenceinfo["Scaling Bitcoin 2018 \"Kaizen\"" "2018-10-06, Tokyo, Japan"] @copyrightyear{2018} @; SUBMITTED
 
 @abstract{
 We take the analogy between Consensus and Court from where TrueBit and Plasma left it,
@@ -1270,7 +1271,7 @@ but on steroids, at a higher level.
 @subsection{Advancement Status}
 
 This talk is only a big picture of what
-we are currently building at (company name withheld). @; Legicash.
+we are currently building at Alacris.
 
 Our design is far from fully implemented yet, but it is not complete vaporware:
 We are three developers working full-time on building the solution,
@@ -1300,9 +1301,9 @@ to more problem domains.
 
 (Information withheld, pending review.)
 
-@;I NEED MORE INFO!   @emph{Legicash} @url{https://legi.cash/}
-@;I WANT TO HELP!   Telegram @url{https://t.me/LegicashCommunity}
-@;TAKE MY MONEY!   Whitepaper @url{https://j.mp/FaCTS}
+@;I NEED MORE INFO!   @emph{Alacris} @url{https://alacris.io/}
+@;I WANT TO HELP!   Telegram @url{https://t.me/Alacris}
+@;TAKE MY MONEY!   Previous Whitepaper @url{https://j.mp/FaCTS}
 @;SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}}))
 
 

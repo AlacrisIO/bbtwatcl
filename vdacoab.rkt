@@ -82,9 +82,9 @@
  @L{Game Semantics: validate past events}
  @L{Epistemic Logic: you are what you know}
  @L{Temporal Logic: multiple possible futures, timeouts}
- ~
  @L{Computability Logic: (game) Semantics first, syntax second}
  @L{... it already has Classical, Intuitionistic, Linear fragments}
+ ~
  @L{Coq: internal models, reflection and extraction}
  @L{Layers: verify the past, make the present, reason about future})
 

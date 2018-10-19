@@ -1,7 +1,7 @@
 x := bbt
 
 src = evo2017.scrbl
-lib = utils.rkt # bibliography.scrbl
+lib = utils.rkt bibliography.scrbl
 
 all: PDF
 
