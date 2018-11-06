@@ -5,8 +5,14 @@ lib = utils.rkt bibliography.scrbl
 
 all: PDF
 
+.PHONY: all dsss splash-i slides html pdf PDF wc mrproper clean
+
 dsss: vdacoab.html
 vdacoab.html: vdacoab.rkt reveal.rkt
+	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
+
+splash-i: splash-i.html
+splash-i.html: splash-i.rkt reveal.rkt
 	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
 
 slides: index.html
@@ -44,4 +50,3 @@ clean:
 
 mrproper:
 	git clean -xfd
-
