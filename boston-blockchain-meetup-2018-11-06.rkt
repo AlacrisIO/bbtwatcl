@@ -1,53 +1,32 @@
 #lang at-exp racket @; -*- Scheme -*-
 #|
-;; Verifying dApp Computations on a Blockchain.
-;; SPLASH-I 2018, November 6th 2018
+;; Alacris: making blockchains fast, secure and more through better abstractions
+;; Boston Blockchain Meetup, November 6th 2018
 ;;
 
 ;; To compile it, use:
-;;    racket splash-i.rkt > splash-i.html
+;;    racket boston-blockchain-meetup-2018-11-06.rkt > boston-blockchain-meetup-2018-11-06.html
 
 ;; This document is available under the bugroff license.
 ;;    http://tunes.org/legalese/bugroff.html
 
+;; Tuesday Nov. 6th:   Blockchain Meetup (Room 1)
+;; Room 1:  32-G449 (capacity 98)
+;; Time: 6-8 pm (talk and Q&A only 1 hour combined)
+
 ;; Abstract:
-;; At the intersection of Game Theory and Game Semantics, of Logic and Probabilities,
-;; of asynchronous distributed calculi and consensual sequential computations,
-;; of static proofs and dynamic reflection, of cryptographic privacy and public auditability
-;; — there is the specification and proven-correct extraction of a distributed application (dApp)
-;; where the interests of participants are kept aligned by a cryptocurrency smart contract.
-;; I will discuss the challenges that the LegiLogic team is trying to solve using Coq,
-;; as we are developing a new approach to building dApps that are correct by construction,
-;; and thereby solve scalability and interoperability issues for blockchains.
-
-Intro
-
-1. Consensus as Court.
-   Contract: Align Interest.
-
-
-   Interactive proof.
-   Non-interactive proof.
-   Economic validation.
-
-
-Lower-level language
-Curry Howard
-
-Past, Present, Future
-Avoid "Thing" and other such non-specific words.
-Watch the level of my (english) language
-
-Trusted validator (network), interactive proofs, non-interactive proofs:
-Same logic, different backends.
-
-Scaling:
-Side-chains.
-Third-Party litigation, Data Publication.
-Court Registry.
-
-Data obfuscation? Yet data public. Zcash or MimbleWimble
--- still have to track the chain of spent UTXOs.
+;; We propose a scalable architecture for distributed applications on a
+;; blockchain, based on the analogy between a distributed system and a
+;; court system — where we take seriously both the explanatory power and
+;; the limits of this analogy. Our approach is broadly similar to that of
+;; TrueBit and Plasma, except that we use formal methods for our
+;; verification games, and rely on a Shared Knowledge Base to prevent the
+;; dreaded "block withholding attacks" of Plasma. The product we are
+;; developing will solve scaling issues with current blockchain
+;; applications; but more importantly perhaps, it will offer higher-level
+;; abstractions thanks to which distributed application developers stand
+;; a chance of writing software that can survive the adversarial world of
+;; blockchain deployments.
 |#
 
 (require scribble/html "reveal.rkt")
@@ -70,15 +49,16 @@ Data obfuscation? Yet data public. Zcash or MimbleWimble
 (define (td- . x) (apply td fgcolor: *green* bgcolor: *light-red* x))
 (define (td= . x) (apply td fgcolor: *green* bgcolor: *light-blue* x))
 
-(slide () @h1{Verifying dApp Computations on a Blockchain}
-  ~
+(slide () @h1{Alacris:}
+  @h3{making blockchains}
+  @h3{fast, secure and more}
+  @h3{through better abstractions}
   ~
   @p{François-René Rideau, @em{LegiLogic}}
   @C{fare@"@"legilogic.com}
   ~
-  ~
-  @p{SPLASH-I 2018, 2018-11-06}
-  @url{https://gitlab.com/legicash/bbtwatcl/blob/master/splash-i.rkt})
+  @p{Boston Blockchain Meetup, 2018-11-06}
+  @url{https://bbt.legi.cash/boston-blockchain-meetup-2018-11-06.html})
 
 (slide-group "Introduction"
 (gslide () @h1{The Take Home Points}
@@ -210,6 +190,38 @@ Data obfuscation? Yet data public. Zcash or MimbleWimble
  ~
  @L{Write dApps using Logic}
  @L{Extract the computations from the Logic})
+
+(gslide () @h1{Layer 1, 2, 3}
+ ~
+ @L{Layer 1: Consensus network}
+ @L{Bitcoin, Ethereum…}
+ ~
+ @L{Layer 2: Smart Contracts on Layer 1}
+ @L{Side-chains, state channels…}
+ ~
+ @L{Layer 3: Contracts on Layer 2}
+ @L{More of the same, but at larger scale})
+
+(gslide () @h1{Near Future: Layer 1 Commoditized}
+ ~
+ @L{Scalability and Interoperability will be solved}
+ @L{Anyone can hold any coin, pay in any other coin in seconds}
+ ~
+ @L{Markets will drive all tokens down to cost of production}
+ @L{No reason to hold onto lots of "utility tokens"}
+ ~
+ @L{Only a few actual cryptocurrencies will keep value}
+ @L{Whichever they are, end of the speculation bubble})
+
+(gslide () @h1{Layer 2 is where the value is}
+ ~
+ @L{The next big chunk value added will be in Layer 2}
+ @L{Non-custodial exchanges, fast payment systems, contracts}
+ ~
+ @L{But dApps are very difficult to write}
+ ~
+ @L{We are building a Blockchain Layer 2 Operating System}
+ @L{To be to Blockchain what Microsoft was to the PC Revolution})
 
 );;Movitation
 
@@ -707,24 +719,14 @@ Data obfuscation? Yet data public. Zcash or MimbleWimble
  (table
   (tr
    @xth{}
-   @xth[width: "25%"]{Economic validation}
+   @xth[width: "25%"]{On-chain validation}
    @xth[width: "25%"]{Interactive Proof}
    @xth[width: "25%"]{Non-Interactive Proof})
   (tr
-   @xth{Consensus}
-   @td+{Provided!}
-   @td-{Required}
-   @td-{Required})
-  (tr
-   @xth{Captured at}
-   @td-{34%}
-   @td+{100%}
-   @td+{100%})
-  (tr
    @xth{Cost}
-   @td-{Capital-intensive}
+   @td-{Expensive}
    @td+{Cheap}
-   @td={Expensive})
+   @td-{Expensive})
   (tr
    @xth{Who pays}
    @td-{Everyone}

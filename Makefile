@@ -15,6 +15,9 @@ splash-i: splash-i.html
 splash-i.html: splash-i.rkt reveal.rkt
 	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
 
+boston-blockchain-meetup-2018-11-06.html: boston-blockchain-meetup-2018-11-06.rkt
+	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
+
 slides: index.html
 index.html: bbt.rkt reveal.rkt
 	racket $< > $@.tmp && mv $@.tmp $@ || rm $@.tmp
