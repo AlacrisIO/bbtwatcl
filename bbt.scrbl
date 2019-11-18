@@ -808,7 +808,7 @@ provided as contract parameters or program constants.
 In other words, destructors may output data into variables,
 but constructors may input data only from constants, and output constants at compile-time.
 
-Such an impoverished language is purposefully @q{Turing-equivalent}
+Such an impoverished language is purposefully @emph{not} @q{Turing-equivalent}
 — which is actually a plus, to get it eventually accepted as part of Bitcoin.
 It is impractical to conduct any computation in the restricted contract virtual machine;
 but that machine is ideally suited as the target language into which to automatically extract

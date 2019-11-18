@@ -1,7 +1,17 @@
 .reveal h1 { font-size: 1.2em; }
 
+.noborder table, th, td {
+    border:none; !important
+    align:center; !important
+}
+#noborder table, th, td {
+    border:none; !important
+    align:center; !important
+}
+
 table, th, td {
     border: 1px solid black;
+    color: #ddd;
 }
 
 html {

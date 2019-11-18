@@ -22,7 +22,7 @@
 ;;
 ;; I reached that grail by putting all the concepts back into place,
 ;; both economic and (techno)logic: the respective roles of
-;; distributed chat (shared knowledge) vs. distributed consensus (common knowledge);
+;; distributed chat (mutual knowledge) vs. distributed consensus (common knowledge);
 ;; the importance of accountability in maintaining good incentives,
 ;; requiring actors to have skin in the game by posting bonds they'll lose if they misbehave;
 ;; "Exit" (and "Enter") being the mechanism to keep service providers honest,
@@ -54,8 +54,8 @@
 (slide () @h1{Binding Blockchains Together}@h1{with Accountability}@h1{through Computability Logic}
   ~
   ~
-  @p{François-René Rideau, @em{Legicash}}
-  @C{fare@"@"legi.cash}
+  @p{François-René Rideau, @em{Mutual Knowledge Systems}}
+  @C{fare@"@"mukn.io}
   ~
   ~
   @p{LambdaConf 2018, 2018-06-05}
@@ -81,11 +81,11 @@
  ~
  @L{This talk: only a BIG PICTURE}
  ~
- @L{@em{Legicash}: now 3 full-time developers} @comment{It's not vaporware.}
+ @L{@em{Mutual Knowledge Systems}: we released a MVP for } @comment{It's not vaporware.}
  ~
  @L{Current status: Mock on Ethereum}
  ~
- @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}})
+ @L{SHOW ME THE CODE!   @url{https://github.com/alacrisio}})
 
 ;;;);; Introduction
 ;;;(slide-group "Motivation"
@@ -398,7 +398,7 @@
  @comment{})
 
 (gslide () @h1{What is an interactive proof?}
- @L{Let's argue: "All sheep are the same color as mine" (in CO)}
+ @L{Let's argue: "All sheep are the same color as mine" (in Colorado)}
  @fragment[#:index 1]{@C{@em{∃x   ∀y      P(x,y)}}}
  @fragment[#:index 3]{@C{@em{vs}}
  @C{@em{∀x   ∃y   ¬P(x,y)}}}
@@ -617,15 +617,15 @@
 ); A Logic for Smart Contracts
 
 (slide-group "The Court Registry"
-(gslide () @h1{The Need for Shared Knowledge}
+(gslide () @h1{The Need for Mutual Knowledge}
  ~
  @L{Black sheep hidden in hangar.}
  ~
  @L{Winning strategy requires truth + knowledge.}
- @L{Good Guy Wins requires @em{Shared Knowledge}.}
+ @L{Good Guy Wins requires @em{Mutual Knowledge}.}
  ~
- @L{@em{Closed contract}: Shared Knowledge easy, but no Scaling.}
- @L{@em{Open contract}: Scaling easy, but no Shared Knowledge. Solution???}
+ @L{@em{Closed contract}: Mutual Knowledge easy, but no Scaling.}
+ @L{@em{Open contract}: Scaling easy, but no Mutual Knowledge. Solution???}
  @comment{})
 
 (gslide () @h1{Court Registry}
@@ -643,7 +643,7 @@
  ~
  @L{WE HAVE THE SAME ISSUES AS EVERYONE ELSE}
  ~
- @L{50% attack. Consider quorum @em{q} of underwriting registrars.}
+ @L{Usual 51% and 34% attacks. Consider quorum @em{q} of underwriting registrars.}
  @L{If @em{q} collude: block withholding. If @em{1-q} collude, registration denial.}
  ~
  @L{"Oracle" dilemma: Closed (oligopoly), or Open (bribing is legal!)}
@@ -654,17 +654,17 @@
  ~
  @L{Ideally, register on the main chain — but can it already scale?})
 
-(gslide () @h1{Shared Knowledge vs Common Knowledge}
+(gslide () @h1{Mutual Knowledge vs Common Knowledge}
  ~
  @L{Concepts from @em{Epistemic Logic}}
  ~
- @L{Shared Knowledge: what @em{everybody knows}}
+ @L{Mutual Knowledge: what @em{everybody knows}}
  @L{Gossip Network. Detects double-spending. Prevents Triple-spending.}
  ~
  @L{Common Knowledge: what @em{everybody knows that everybody knows…}}
  @L{Consensus. Resolves double-spending. Much more expensive.}
  @comment{
-   Shared Knowledge can serve as a precursor to Common Knowledge.
+   Mutual Knowledge can serve as a precursor to Common Knowledge.
    Obviously it is strictly less powerful than Common Knowledge, and much cheaper to achieve:
    it requires no synchronization between the participants and can be reasonably achieved in seconds.
    Meanwhile Common Knowledge takes tens of minutes to achieve with current technology.
@@ -703,13 +703,13 @@
 
 (gslide () @h1{Beyond Fast Payment}
  ~
- @L{dApps that extend Fast Payment: non-custodial exchange…}
+ @L{DApps that extend Fast Payment: non-custodial exchange…}
  ~
  @L{Anonymous rather than fast: Zcash-on-Ethereum…}
  ~
- @L{Future: Develop arbitrary dApps with Computability Logic.}
+ @L{Future: Develop arbitrary DApps with Computability Logic.}
  ~
- @L{(Computability) Logic is not just for cryptocurrency dApps…}
+ @L{(Computability) Logic is not just for cryptocurrency DApps…}
  @comment{})
 
 ); Court Registry
@@ -719,7 +719,7 @@
  ~
  @L{Take "Consensus as Court" Seriously} @comment{It's a productive story}
  ~
- @L{Solve Scaling, Interoperability, dApps}
+ @L{Solve Scaling, Interoperability, DApps}
  ~
  ~
  @L{Contracts are to @em{not} evaluate code on the blockchain}
@@ -749,13 +749,14 @@
 
 (gslide () @h1{Contact}
  ~
- @L{I NEED MORE INFO!   @em{Legicash} @url{https://legi.cash/}}
+ @L{I NEED MORE INFO!   @em{Mutual Knowledge Systems} @url{https://mukn.io/}}
  ~
+#|
  @L{I WANT TO HELP!   Telegram @url{https://t.me/LegicashCommunity}}
  ~
  @L{TAKE MY MONEY!   Whitepaper @url{https://j.mp/FaCTS}}
  ~
- @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}}))
+ @L{SHOW ME THE CODE!   @url{https://j.mp/LegicashCodeReleasePreview}}|#))
 
 
 #|
